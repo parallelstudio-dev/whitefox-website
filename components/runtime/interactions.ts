@@ -1,6 +1,7 @@
 // Interactive components of the Whitefox site, reimplemented without Framer's runtime.
 // Values (speeds, distances, thresholds) were measured on the live Framer site.
 import { play, reduced, springEasing } from "./motion";
+import SECTORS from "@/content/sectors.json";
 
 // Counter targets (Framer keeps them in component props, not in the markup).
 // Verified on the live site (18 Oct 2026): "/" and "/about-us" both count to 18, 95%, 815K+, 471+.
@@ -124,7 +125,51 @@ function shutter(main: HTMLElement) {
   return () => io.disconnect();
 }
 
+/**
+ * Sector list (home): hovering a row makes it the active row (lighter band, white border, white title, arrow turned
+ * 45°) and shows that sector's image, title and text in the panel beside the list. Content from the live component
+ * (content/sectors.json); clicking a row does nothing extra, as on the live site.
+ */
+function sectors(main: HTMLElement) {
+  const ACTIVE = { cls: "framer-v-1ia68xd", name: "Desktop Active", border: "var(--token-10c96ffd-6509-42e3-8261-20b495ab6f7e, rgb(242, 242, 242))", bg: "rgba(250, 250, 250, 0.08)" };
+  const IDLE = { cls: "framer-v-2h70ak", name: "Desktop", border: "rgba(250, 250, 250, 0.2)", bg: "rgba(0, 0, 0, 0)" };
+  const rows = [...main.querySelectorAll<HTMLElement>(`.framer-6SAIZ.${ACTIVE.cls}, .framer-6SAIZ.${IDLE.cls}`)];
+  if (!rows.length) return () => {};
+  const byTitle = new Map(SECTORS.map((s) => [s.title, s]));
+  const titleOf = (row: HTMLElement) => row.querySelector("p")?.textContent?.trim() ?? "";
+  const setRow = (row: HTMLElement, on: boolean) => {
+    const v = on ? ACTIVE : IDLE, o = on ? IDLE : ACTIVE;
+    row.classList.replace(o.cls, v.cls); row.setAttribute("data-framer-name", v.name);
+    row.style.transition = "background-color .3s ease, border-color .3s ease";
+    row.style.setProperty("--border-color", v.border); row.style.backgroundColor = v.bg;
+    const txt = row.querySelector<HTMLElement>("[data-framer-component-type='RichTextContainer']"); const p = row.querySelector<HTMLElement>("p");
+    if (on) { txt?.style.setProperty("--extracted-r6o4lv", ACTIVE.border); p?.style.setProperty("--framer-text-color", "var(--extracted-r6o4lv, var(--token-10c96ffd-6509-42e3-8261-20b495ab6f7e, rgb(242, 242, 242)))"); }
+    else { txt?.style.removeProperty("--extracted-r6o4lv"); p?.style.removeProperty("--framer-text-color"); }
+    const icon = row.querySelector<HTMLElement>("[data-framer-name='Icon']");
+    if (icon) { icon.style.transition = "transform .3s ease"; icon.style.transform = on ? "rotate(45deg)" : "none"; }
+  };
+  // Each breakpoint variant has its own list and panel; the panel is found from its title (an <h5>) in the same variant.
+  const scopeOf = (row: HTMLElement) => row.closest(".ssr-variant") ?? main;
+  const show = (row: HTMLElement) => {
+    const scope = scopeOf(row); const s = byTitle.get(titleOf(row)); if (!s) return;
+    scope.querySelectorAll<HTMLElement>(`.framer-6SAIZ.${ACTIVE.cls}`).forEach((r) => r !== row && setRow(r, false));
+    setRow(row, true);
+    const h = [...scope.querySelectorAll<HTMLElement>("h5")].find((e) => byTitle.has(e.textContent?.trim() ?? "")); if (!h) return;
+    let box: HTMLElement | null = h; while (box && !box.querySelector("img")) box = box.parentElement;
+    const img = box?.querySelector<HTMLImageElement>("img"); const body = h.closest("[data-framer-component-type]")?.parentElement?.querySelector<HTMLElement>("p:not(:empty)");
+    if (img && img.getAttribute("src") !== s.src) {
+      img.animate([{ opacity: 0.4 }, { opacity: 1 }], { duration: 350, easing: "ease-out" });
+      img.srcset = s.srcset; img.src = s.src; img.style.objectPosition = s.position; img.width = s.width; img.height = s.height;
+    }
+    h.textContent = s.title;
+    const bodyP = [...(box?.querySelectorAll<HTMLElement>("p") ?? [])].find((p) => p.textContent && p.textContent.length > 40);
+    if (bodyP) bodyP.textContent = s.body; else if (body) body.textContent = s.body;
+  };
+  const offs = rows.map((row) => { const on = () => show(row); row.addEventListener("pointerenter", on); row.addEventListener("focus", on); return () => { row.removeEventListener("pointerenter", on); row.removeEventListener("focus", on); }; });
+  return () => offs.forEach((f) => f());
+}
+
 export function initInteractions(main: HTMLElement) {
-  const off = [header(main), tickers(main), counters(main), blocks(main), shutter(main)];
+  const off = [header(main), tickers(main), counters(main), blocks(main), shutter(main), sectors(main)];
   return () => off.forEach((f) => f());
 }

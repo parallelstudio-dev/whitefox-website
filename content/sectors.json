@@ -1,0 +1,83 @@
+[
+ {
+  "title": "Legal",
+  "body": "Secure elite legal counsel for your firm or step into a high-stakes role designed to accelerate your professional trajectory.",
+  "src": "/assets/img/sectors/legal-1441.png",
+  "srcset": "/assets/img/sectors/legal-512.png 512w, /assets/img/sectors/legal-1024.png 1024w, /assets/img/sectors/legal-1441.png 1441w",
+  "width": 1441,
+  "height": 1092,
+  "position": "64.2% 21.6%"
+ },
+ {
+  "title": "Accounting & Finance",
+  "body": "Gain a competitive financial edge with expert hires or secure a strategic position that matches your career ambitions.",
+  "src": "/assets/img/sectors/accounting-finance-1448.png",
+  "srcset": "/assets/img/sectors/accounting-finance-512.png 512w, /assets/img/sectors/accounting-finance-1024.png 1024w, /assets/img/sectors/accounting-finance-1448.png 1448w",
+  "width": 1448,
+  "height": 1086,
+  "position": "57.3% 23.9%"
+ },
+ {
+  "title": "Administration & Business Support",
+  "body": "Source talent that will help your business run smoothly or find an opportunity where your skills will make a difference to a business.",
+  "src": "/assets/img/sectors/administration-business-support-1445.png",
+  "srcset": "/assets/img/sectors/administration-business-support-512.png 512w, /assets/img/sectors/administration-business-support-1024.png 1024w, /assets/img/sectors/administration-business-support-1445.png 1445w",
+  "width": 1445,
+  "height": 1088,
+  "position": "53% 20.8%"
+ },
+ {
+  "title": "Tourism",
+  "body": "Connect with passionate industry experts to drive your travel brand or discover roles that offer new global perspectives.",
+  "src": "/assets/img/sectors/tourism-1441.png",
+  "srcset": "/assets/img/sectors/tourism-512.png 512w, /assets/img/sectors/tourism-1024.png 1024w, /assets/img/sectors/tourism-1441.png 1441w",
+  "width": 1441,
+  "height": 1091,
+  "position": "62.5% 41.6%"
+ },
+ {
+  "title": "Hospitality",
+  "body": "Hire service-driven professionals to elevate your guest experience or find your next leadership role in premium venues.",
+  "src": "/assets/img/sectors/hospitality-1441.png",
+  "srcset": "/assets/img/sectors/hospitality-512.png 512w, /assets/img/sectors/hospitality-1024.png 1024w, /assets/img/sectors/hospitality-1441.png 1441w",
+  "width": 1441,
+  "height": 1092,
+  "position": "50.8% 62%"
+ },
+ {
+  "title": "Construction",
+  "body": "Source certified site specialists for your next project or advance your trade career with exclusive opportunities in the field.",
+  "src": "/assets/img/sectors/construction-1448.png",
+  "srcset": "/assets/img/sectors/construction-512.png 512w, /assets/img/sectors/construction-1024.png 1024w, /assets/img/sectors/construction-1448.png 1448w",
+  "width": 1448,
+  "height": 1086,
+  "position": "50% 50%"
+ },
+ {
+  "title": "Agriculture",
+  "body": "Strengthen your seasonal or permanent workforce with reliable labor or cultivate a secure future in the agricultural sector.",
+  "src": "/assets/img/sectors/agriculture-1446.png",
+  "srcset": "/assets/img/sectors/agriculture-512.png 512w, /assets/img/sectors/agriculture-1024.png 1024w, /assets/img/sectors/agriculture-1446.png 1446w",
+  "width": 1446,
+  "height": 1087,
+  "position": "51.4% 41.8%"
+ },
+ {
+  "title": "Mining",
+  "body": "Deploy specialized mining experts to optimize your operations or launch a high-impact career in the Australian resources industry.",
+  "src": "/assets/img/sectors/mining-1443.png",
+  "srcset": "/assets/img/sectors/mining-512.png 512w, /assets/img/sectors/mining-1024.png 1024w, /assets/img/sectors/mining-1443.png 1443w",
+  "width": 1443,
+  "height": 1090,
+  "position": "52% 12.4%"
+ },
+ {
+  "title": "IT & Technology",
+  "body": "Access top-tier technical talent to scale your infrastructure or join forward-thinking teams building the next generation of digital solutions.",
+  "src": "/assets/img/sectors/it-technology-1448.png",
+  "srcset": "/assets/img/sectors/it-technology-512.png 512w, /assets/img/sectors/it-technology-1024.png 1024w, /assets/img/sectors/it-technology-1448.png 1448w",
+  "width": 1448,
+  "height": 1086,
+  "position": "37.8% 5.7%"
+ }
+]
