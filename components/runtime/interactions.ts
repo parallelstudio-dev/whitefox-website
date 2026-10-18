@@ -169,7 +169,58 @@ function sectors(main: HTMLElement) {
   return () => offs.forEach((f) => f());
 }
 
+/**
+ * Testimonial slider (home): one card at a time, autoplay every 5s, sliding left (live settings: intervalControl 5,
+ * direction left, itemAmount 1, gap 20, drag). The round ← → controls (CarouselControlsDesktop / Phone) are in the
+ * markup but disabled until scripts run; they are enabled here and drive the track.
+ * The slide easing is an estimate (not measured on the live site).
+ */
+function testimonials(main: HTMLElement) {
+  const tracks = [...main.querySelectorAll<HTMLUListElement>("ul")].filter((ul) => ul.querySelector("[class*='-container'][data-framer-name='1']") && /gap:20px/.test(ul.getAttribute("style") || ""));
+  if (!tracks.length) return () => {};
+  const offs: (() => void)[] = [];
+  const s = springEasing(200, 40, 1);
+  tracks.forEach((ul) => {
+    const n = ul.children.length; let i = 0, timer = 0;
+    const scope = ul.closest(".ssr-variant") ?? main;
+    const go = (k: number) => {
+      i = (k + n) % n;
+      const w = (ul.parentElement as HTMLElement).clientWidth;
+      ul.style.transition = reduced() ? "none" : `transform ${s.duration}ms ${s.easing}`;
+      ul.style.transform = `translateX(${-i * (w + 20)}px)`;
+    };
+    // Autoplay only while the slider is on screen (live setting playOffscreen: false).
+    let onScreen = false;
+    const restart = () => { clearInterval(timer); if (!reduced() && onScreen) timer = window.setInterval(() => { if (ul.offsetParent) go(i + 1); }, 5000); };
+    // Start as soon as any part is visible; only (re)start the timer when visibility actually changes.
+    const vio = new IntersectionObserver(([e]) => { if (e.isIntersecting === onScreen) return; onScreen = e.isIntersecting; restart(); }, { threshold: 0 });
+    // Watch the clipping container, not the track: once the track slides, it is clipped out of its own box.
+    vio.observe(ul.parentElement as HTMLElement); offs.push(() => vio.disconnect());
+    // Controls: the visible pair for this breakpoint.
+    const btns = [...scope.querySelectorAll<HTMLButtonElement>("[data-framer-name^='CarouselControls'] button")];
+    btns.forEach((b) => {
+      b.disabled = false; b.style.opacity = "1"; b.style.cursor = "pointer";
+      const img = b.querySelector("img"); if (img) img.style.opacity = "1";
+      const prev = b.getAttribute("aria-label") === "Previous";
+      const click = () => { go(i + (prev ? -1 : 1)); restart(); };
+      // Hover: rgb(242,242,242) → rgb(184,184,184) (measured on the live site); no scale on press.
+      const enter = () => { b.style.backgroundColor = "rgb(184, 184, 184)"; }; const leave = () => { b.style.backgroundColor = ""; };
+      b.addEventListener("click", click); b.addEventListener("pointerenter", enter); b.addEventListener("pointerleave", leave);
+      offs.push(() => { b.removeEventListener("click", click); b.removeEventListener("pointerenter", enter); b.removeEventListener("pointerleave", leave); });
+    });
+    // Drag / swipe.
+    let x0 = 0, dragging = false;
+    const pd = (e: PointerEvent) => { dragging = true; x0 = e.clientX; };
+    const pu = (e: PointerEvent) => { if (!dragging) return; dragging = false; const dx = e.clientX - x0; if (Math.abs(dx) > 40) { go(i + (dx < 0 ? 1 : -1)); restart(); } };
+    ul.addEventListener("pointerdown", pd); window.addEventListener("pointerup", pu);
+    const onResize = () => go(i); window.addEventListener("resize", onResize);
+    restart();
+    offs.push(() => { clearInterval(timer); ul.removeEventListener("pointerdown", pd); window.removeEventListener("pointerup", pu); window.removeEventListener("resize", onResize); });
+  });
+  return () => offs.forEach((f) => f());
+}
+
 export function initInteractions(main: HTMLElement) {
-  const off = [header(main), tickers(main), counters(main), blocks(main), shutter(main), sectors(main)];
+  const off = [header(main), tickers(main), counters(main), blocks(main), shutter(main), sectors(main), testimonials(main)];
   return () => off.forEach((f) => f());
 }
