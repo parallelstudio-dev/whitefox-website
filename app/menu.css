@@ -1,0 +1,20 @@
+/* Header menu items (Framer component "tAfqh"). Framer injects these rules only when the menu first opens, so
+   they are not in the server-rendered page CSS. Copied from the live site's CSSOM. */
+.framer-tAfqh.framer-1c4fjll, .framer-tAfqh .framer-1c4fjll { display: block; }
+.framer-tAfqh.framer-1raphkt { place-content: flex-start; align-items: flex-start; cursor: pointer; display: flex; flex-flow: row; gap: 20px; height: min-content; overflow: visible; padding: 20px; position: relative; text-decoration: none; width: 377px; }
+.framer-tAfqh .framer-16spv5f { aspect-ratio: 1 / 1; flex: 0 0 auto; height: var(--framer-aspect-ratio-supported, 24px); position: relative; width: 24px; }
+.framer-tAfqh .framer-12k88mk { place-content: flex-start; align-items: flex-start; display: flex; flex: 1 0 0px; flex-flow: column; gap: 8px; height: min-content; overflow: visible; padding: 0px; position: relative; width: 1px; }
+.framer-tAfqh .framer-1vo98is, .framer-tAfqh .framer-zpxgg { --framer-text-wrap-override: balance; flex: 0 0 auto; height: auto; position: relative; width: 100%; }
+.framer-tAfqh.framer-v-of3nbn.framer-1raphkt { align-content: center; align-items: center; gap: 16px; padding: 12px; }
+.framer-tAfqh[data-border="true"]::after, .framer-tAfqh [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0px; top: 0px; border-radius: inherit; corner-shape: inherit; pointer-events: none; }
+
+/* Item states from the component's variants: "Desktop - Default" hover and "Phone" pressed both show a 1px
+   rgb(43,43,43) border on rgb(28,28,28). Transition: spring, bounce 0.2, 0.4s. */
+.framer-tAfqh.framer-1raphkt { transition: background-color 0.4s cubic-bezier(.2,.9,.3,1.1); }
+.framer-tAfqh.framer-1raphkt::after { content: ""; position: absolute; inset: 0; border-radius: inherit; border: 1px solid transparent; pointer-events: none; transition: border-color 0.4s cubic-bezier(.2,.9,.3,1.1); }
+@media (hover: hover) {
+  .framer-tAfqh.framer-v-1raphkt:hover { background-color: var(--token-34d5e02f-0097-43f7-9f5b-6db13696a879, rgb(28, 28, 28)) !important; }
+  .framer-tAfqh.framer-v-1raphkt:hover::after { border-color: var(--token-41bfe799-3222-4cbc-b2bf-cb541e0073bb, rgb(43, 43, 43)); }
+}
+.framer-tAfqh.framer-v-of3nbn:active { background-color: var(--token-34d5e02f-0097-43f7-9f5b-6db13696a879, rgb(28, 28, 28)) !important; }
+.framer-tAfqh.framer-v-of3nbn:active::after { border-color: var(--token-41bfe799-3222-4cbc-b2bf-cb541e0073bb, rgb(43, 43, 43)); }

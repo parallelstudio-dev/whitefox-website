@@ -1,4 +1,5 @@
 import Script from "next/script";
+import "./menu.css";
 
 // Google Tag Manager and GA4 exactly as on the Framer site (GTM-NJXNXSNH, G-RB3BWV88CR).
 const GTM = "GTM-NJXNXSNH";

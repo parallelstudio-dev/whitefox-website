@@ -2,6 +2,7 @@
 // Values (speeds, distances, thresholds) were measured on the live Framer site.
 import { play, reduced, springEasing } from "./motion";
 import SECTORS from "@/content/sectors.json";
+import MENUS from "@/content/menu.json";
 
 // Counter targets (Framer keeps them in component props, not in the markup).
 // Verified on the live site (18 Oct 2026): "/" and "/about-us" both count to 18, 95%, 815K+, 471+.
@@ -32,6 +33,45 @@ function header(main: HTMLElement) {
   const on = () => { const y = window.scrollY; if (y > last + 2 && y > 20) set(false); else if (y < last - 2 || y <= 20) set(true); last = y; };
   window.addEventListener("scroll", on, { passive: true });
   return () => window.removeEventListener("scroll", on);
+}
+
+/** Header menu. Framer renders the open menu only on click, so its markup was captured from the live site
+ *  (scripts/migrate/capture-menu.mjs → content/menu.json, one per closed nav variant). As on the live site:
+ *  - a tap on the menu icon swaps the nav to its "… Open" variant; the panel grows in with the nav's
+ *    transition (spring 400/40/1, from the component); the open nav locks page scroll;
+ *  - any tap on the open nav closes it at once (Framer unmounts the panel, no exit animation). */
+function menu(main: HTMLElement) {
+  const menus = MENUS as Record<string, { open: string; html: string; symbols: string[] }>;
+  const closed = new WeakMap<Element, Element>();
+  let defs: HTMLElement | null = null;
+  const onClick = (e: MouseEvent) => {
+    const nav = (e.target as Element).closest("nav");
+    if (!nav || !main.contains(nav)) return;
+    const name = nav.getAttribute("data-framer-name") || "";
+    const back = closed.get(nav);
+    // A link inside the menu still navigates; close after the click has been handled.
+    if (back) { if ((e.target as Element).closest("a")) setTimeout(() => nav.replaceWith(back)); else nav.replaceWith(back); return; }
+    if (!menus[name] || !(e.target as Element).closest('[data-framer-name="Icon"]')) return;
+    if (!defs) {
+      defs = document.createElement("div");
+      defs.setAttribute("aria-hidden", "true");
+      defs.style.cssText = "position:absolute;width:0;height:0;overflow:hidden";
+      defs.innerHTML = menus[name].symbols.join("");
+      document.body.appendChild(defs);
+    }
+    const t = document.createElement("template");
+    t.innerHTML = menus[name].html;
+    const open = t.content.firstElementChild!;
+    closed.set(open, nav);
+    nav.replaceWith(open);
+    const content = open.querySelector<HTMLElement>('[data-framer-name="Content"]');
+    if (content && !reduced()) {
+      const s = springEasing(400, 40, 1);
+      content.animate([{ clipPath: "inset(0 0 100% 0 round 12px)" }, { clipPath: "inset(0 0 0% 0 round 12px)" }], { duration: s.duration, easing: s.easing });
+    }
+  };
+  main.addEventListener("click", onClick);
+  return () => { main.removeEventListener("click", onClick); defs?.remove(); };
 }
 
 /** Logo ticker: the strip scrolls left at 70px/s forever (items duplicated for a seamless loop). */
@@ -221,6 +261,6 @@ function testimonials(main: HTMLElement) {
 }
 
 export function initInteractions(main: HTMLElement) {
-  const off = [header(main), tickers(main), counters(main), blocks(main), shutter(main), sectors(main), testimonials(main)];
+  const off = [header(main), menu(main), tickers(main), counters(main), blocks(main), shutter(main), sectors(main), testimonials(main)];
   return () => off.forEach((f) => f());
 }
