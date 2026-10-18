@@ -5,3 +5,4 @@ out/
 *.tsbuildinfo
 qa/shots/
 .vercel
+__pycache__
