@@ -20,7 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: meta.title,
     description: tag("description"),
     alternates: { canonical: meta.canonical },
-    robots: process.env.VERCEL_ENV === "production" ? tag("robots") : { index: false, follow: false },
+    // Never indexed until the site is switched live on Whitefox's own domain (set SITE_LIVE=1 in Vercel then).
+    robots: process.env.SITE_LIVE === "1" ? tag("robots") : { index: false, follow: false },
     openGraph: { type: "website", url: meta.canonical, title: tag("og:title"), description: tag("og:description"), images: tag("og:image") ? [tag("og:image")!] : [] },
     twitter: { card: "summary_large_image", title: tag("twitter:title"), description: tag("twitter:description"), images: tag("twitter:image") ? [tag("twitter:image")!] : [] },
     icons: {

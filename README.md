@@ -18,5 +18,5 @@ npm run migrate    # re-run the Framer conversion (Python 3 + beautifulsoup4 + l
 ```
 
 Not yet wired: the Framer forms (Contact, Submit Vacancy, newsletter) — submission target to be decided (likely Tally).
-Submit Resume keeps its existing Tally embed. Preview deployments are `noindex`; production indexing follows the
-original robots settings.
+Submit Resume keeps its existing Tally embed. Every deployment is `noindex` until `SITE_LIVE=1` is set in Vercel (only when the site goes live on
+whitefoxrecruitment.com.au); then it follows the original robots settings.
