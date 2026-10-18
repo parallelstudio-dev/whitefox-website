@@ -1,0 +1,116 @@
+{
+ "route": "/coffee-break",
+ "title": "Coffee Break | Recruitment Insights | Whitefox Recruitment",
+ "tags": [
+  {
+   "property": "og:url",
+   "content": "https://whitefoxrecruitment.com.au/coffee-break"
+  },
+  {
+   "name": "description",
+   "content": "Explore recruitment insights, hiring trends, career advice and employment market updates from Whitefox Recruitment, a Gold Coast recruitment agency serving South East Queensland."
+  },
+  {
+   "property": "og:type",
+   "content": "website"
+  },
+  {
+   "property": "og:title",
+   "content": "Coffee Break | Recruitment Insights | Whitefox Recruitment"
+  },
+  {
+   "property": "og:description",
+   "content": "Explore recruitment insights, hiring trends, career advice and employment market updates from Whitefox Recruitment, a Gold Coast recruitment agency serving South East Queensland."
+  },
+  {
+   "property": "og:image",
+   "content": "/assets/img/zGJ860c1shnPFP2VGYz50T5kw.png"
+  },
+  {
+   "name": "twitter:card",
+   "content": "summary_large_image"
+  },
+  {
+   "name": "twitter:title",
+   "content": "Coffee Break | Recruitment Insights | Whitefox Recruitment"
+  },
+  {
+   "name": "twitter:description",
+   "content": "Explore recruitment insights, hiring trends, career advice and employment market updates from Whitefox Recruitment, a Gold Coast recruitment agency serving South East Queensland."
+  },
+  {
+   "name": "twitter:image",
+   "content": "/assets/img/zGJ860c1shnPFP2VGYz50T5kw.png"
+  },
+  {
+   "name": "robots",
+   "content": "max-image-preview:large"
+  }
+ ],
+ "icons": [
+  {
+   "rel": "icon",
+   "href": "/assets/img/xBdl2Yu0ZZNQbnY9KJEZO8JAYjY.png",
+   "media": "(prefers-color-scheme: light)"
+  },
+  {
+   "rel": "icon",
+   "href": "/assets/img/owvDlUMNkPyKKXUiDeVNwi70.png",
+   "media": "(prefers-color-scheme: dark)"
+  },
+  {
+   "rel": "apple-touch-icon",
+   "href": "/assets/img/jAfSxai60KQxuXBaGcYdB3pHyE.png",
+   "media": null
+  }
+ ],
+ "canonical": "https://whitefoxrecruitment.com.au/coffee-break",
+ "appear": {
+  "1q4tcsc": {
+   "default": {
+    "initial": {
+     "opacity": 0.001,
+     "rotate": 0,
+     "rotateX": 0,
+     "rotateY": 0,
+     "scale": 1,
+     "skewX": 0,
+     "skewY": 0,
+     "x": 0,
+     "y": 20
+    },
+    "animate": {
+     "opacity": 1,
+     "rotate": 0,
+     "rotateX": 0,
+     "rotateY": 0,
+     "scale": 1,
+     "skewX": 0,
+     "skewY": 0,
+     "transition": {
+      "bounce": 0.2,
+      "delay": 0.2,
+      "duration": 0.8,
+      "type": "spring"
+     },
+     "x": 0,
+     "y": 0
+    }
+   }
+  }
+ },
+ "breakpoints": [
+  {
+   "hash": "1l66ybp",
+   "mediaQuery": "(min-width: 1200px)"
+  },
+  {
+   "hash": "upapg2",
+   "mediaQuery": "(min-width: 810px) and (max-width: 1199.98px)"
+  },
+  {
+   "hash": "1x50u1b",
+   "mediaQuery": "(max-width: 809.98px)"
+  }
+ ]
+}

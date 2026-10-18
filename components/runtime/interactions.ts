@@ -1,0 +1,130 @@
+// Interactive components of the Whitefox site, reimplemented without Framer's runtime.
+// Values (speeds, distances, thresholds) were measured on the live Framer site.
+import { play, reduced, springEasing } from "./motion";
+
+// Counter targets (Framer keeps them in component props, not in the markup).
+// Verified on the live site (18 Oct 2026): "/" and "/about-us" both count to 18, 95%, 815K+, 471+.
+// Live sampling showed the count finishing within ~1s of entering view, so the duration is 1s
+// (sampled at ~230ms intervals; the exact easing curve is not measured).
+const COUNTERS: Record<string, number[]> = {
+  "/": [18, 95, 815, 471],
+  "/about-us": [18, 95, 815, 471],
+};
+
+const visible = (el: Element) => (el as HTMLElement).offsetParent !== null || getComputedStyle(el).position === "fixed";
+
+/** Header: slides up (78px) and fades out while scrolling down, comes back on any scroll up (measured).
+ *  The 20px "always shown near the top" threshold is an estimate: the live header was already hidden at y=60. */
+function header(main: HTMLElement) {
+  const bars = [...main.querySelectorAll<HTMLElement>("*")].filter((e) => getComputedStyle(e).position === "fixed" && e.querySelector("nav"));
+  if (!bars.length) return () => {};
+  let last = window.scrollY, shown = true;
+  const base = bars.map((b) => b.style.transform || "translateX(-50%)");
+  const set = (show: boolean) => {
+    if (show === shown) return; shown = show;
+    const s = springEasing(400, 40, 1);
+    bars.forEach((b, i) => b.animate(
+      [{ transform: getComputedStyle(b).transform, opacity: getComputedStyle(b).opacity },
+       { transform: `${base[i]} translateY(${show ? 0 : -78}px)`, opacity: show ? 1 : 0 }],
+      { duration: s.duration, easing: s.easing, fill: "forwards" }));
+  };
+  const on = () => { const y = window.scrollY; if (y > last + 2 && y > 20) set(false); else if (y < last - 2 || y <= 20) set(true); last = y; };
+  window.addEventListener("scroll", on, { passive: true });
+  return () => window.removeEventListener("scroll", on);
+}
+
+/** Logo ticker: the strip scrolls left at 70px/s forever (items duplicated for a seamless loop). */
+function tickers(main: HTMLElement) {
+  const offs: (() => void)[] = [];
+  main.querySelectorAll<HTMLUListElement>("ul").forEach((ul) => {
+    if (!ul.querySelector(".ticker-item")) return;
+    const items = [...ul.children] as HTMLElement[];
+    items.forEach((li) => { const c = li.cloneNode(true) as HTMLElement; c.setAttribute("aria-hidden", "true"); ul.appendChild(c); });
+    ul.style.opacity = "1";
+    ul.style.willChange = "transform";
+    let x = 0, prev = performance.now(), raf = 0, span = 0;
+    const measure = () => { const gap = parseFloat(getComputedStyle(ul).columnGap || getComputedStyle(ul).gap) || 0; span = items.reduce((s, li) => s + li.offsetWidth + gap, 0); };
+    measure();
+    const tick = (t: number) => {
+      const dt = Math.min(64, t - prev); prev = t;
+      if (visible(ul)) { if (!span) measure(); x -= (70 * dt) / 1000; if (span && -x >= span) x += span; ul.style.transform = `translateX(${x}px)`; }
+      raf = requestAnimationFrame(tick);
+    };
+    if (!reduced()) raf = requestAnimationFrame(tick);
+    const ro = new ResizeObserver(measure); ro.observe(ul);
+    offs.push(() => { cancelAnimationFrame(raf); ro.disconnect(); });
+  });
+  return () => offs.forEach((f) => f());
+}
+
+/** Counters: count up from 0 when they come into view (~1s, ease-out), keeping their prefix/suffix. */
+function counters(main: HTMLElement) {
+  const targets = COUNTERS[location.pathname.replace(/\/$/, "") || "/"];
+  if (!targets) return () => {};
+  // Each counter renders two <p>: a hidden sizer and the visible gradient number (position:absolute).
+  // Desktop / tablet / phone variants each render a copy; only the active variant's copies are laid out,
+  // so a counter's target is its position among the counters visible right now.
+  const all = [...main.querySelectorAll<HTMLParagraphElement>("p")].filter((p) => /position:\s*absolute/.test(p.getAttribute("style") || "") && /^0/.test(p.textContent || ""));
+  const shownNow = () => all.filter((p) => p.offsetParent !== null);
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (!e.isIntersecting) return; io.unobserve(e.target);
+    const p = e.target as HTMLParagraphElement; const sizer = p.previousElementSibling as HTMLElement | null;
+    const target = targets[shownNow().indexOf(p)] ?? 0;
+    const suffix = (p.textContent || "").replace(/^0/, "");
+    const t0 = performance.now(), D = reduced() ? 0 : 1000;
+    const step = (t: number) => {
+      const k = D ? Math.min(1, (t - t0) / D) : 1; const v = Math.round(target * (1 - Math.pow(1 - k, 3)));
+      p.textContent = `${v}${suffix}`; if (sizer) sizer.textContent = `${v}${suffix}`;
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }), { threshold: 0.4 });
+  all.forEach((p) => io.observe(p));
+  return () => io.disconnect();
+}
+
+/** Blocks Framer renders with will-change + opacity:0 (a scroll-in effect) play in as they enter the viewport. */
+function blocks(main: HTMLElement) {
+  const els = [...main.querySelectorAll<HTMLElement>("[style*='will-change']")].filter((e) => /opacity:\s*0(;|$)/.test(e.getAttribute("style") || ""));
+  if (reduced()) { els.forEach((e) => { e.style.opacity = "1"; e.style.transform = "none"; }); return () => {}; }
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (!e.isIntersecting) return; io.unobserve(e.target);
+    play(e.target as HTMLElement, { opacity: 1 }, { type: "spring", stiffness: 125, damping: 35, mass: 2 });
+  }), { rootMargin: "0px 0px -8% 0px" });
+  els.forEach((e) => io.observe(e));
+  return () => io.disconnect();
+}
+
+/**
+ * Shutter footer (desktop): the WHITEFOX letters wait off to the left ("Default" variant) and slide into place
+ * ("Default 2") once the footer is about a third into view. Measured on the live site: the first letter settles
+ * after ~1.1s, the last after ~1.7s. Implemented as a variant class swap with a FLIP slide per letter.
+ */
+function shutter(main: HTMLElement) {
+  const roots = [...main.querySelectorAll<HTMLElement>(".framer-v-1lqr6d7")];
+  if (!roots.length) return () => {};
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (!e.isIntersecting) return; io.unobserve(e.target);
+    const root = e.target as HTMLElement;
+    const letters = [...root.children].map((c) => c.firstElementChild as HTMLElement).filter(Boolean);
+    const before = letters.map((l) => l.getBoundingClientRect().left);
+    root.classList.replace("framer-v-1lqr6d7", "framer-v-167lrlx");
+    root.setAttribute("data-framer-name", "Default 2");
+    // In "Default 2" each letter is centred on both axes (live: transform translate(-50%, -50%)).
+    letters.forEach((l) => { if (/translateY\(-50%\)/.test(l.getAttribute("style") || "")) l.style.transform = "translate(-50%, -50%)"; });
+    if (reduced()) return;
+    const s = springEasing(120, 20, 1);
+    letters.forEach((l, i) => {
+      const dx = before[i] - l.getBoundingClientRect().left;
+      if (!dx) return;
+      l.animate([{ translate: `${dx}px 0` }, { translate: "0 0" }], { duration: s.duration, easing: s.easing, delay: 450 + i * 70, fill: "backwards" });
+    });
+  }), { rootMargin: "0px 0px -30% 0px" });
+  roots.forEach((r) => io.observe(r));
+  return () => io.disconnect();
+}
+
+export function initInteractions(main: HTMLElement) {
+  const off = [header(main), tickers(main), counters(main), blocks(main), shutter(main)];
+  return () => off.forEach((f) => f());
+}

@@ -1,0 +1,116 @@
+{
+ "route": "/contact",
+ "title": "Contact Whitefox Recruitment | Recruitment Agency Gold Coast",
+ "tags": [
+  {
+   "property": "og:url",
+   "content": "https://whitefoxrecruitment.com.au/contact"
+  },
+  {
+   "name": "description",
+   "content": "Contact Whitefox Recruitment, a Gold Coast recruitment agency connecting employers and job seekers across South East Queensland and Northern New South Wales."
+  },
+  {
+   "property": "og:type",
+   "content": "website"
+  },
+  {
+   "property": "og:title",
+   "content": "Contact Whitefox Recruitment | Recruitment Agency Gold Coast"
+  },
+  {
+   "property": "og:description",
+   "content": "Contact Whitefox Recruitment, a Gold Coast recruitment agency connecting employers and job seekers across South East Queensland and Northern New South Wales."
+  },
+  {
+   "property": "og:image",
+   "content": "/assets/img/zGJ860c1shnPFP2VGYz50T5kw.png"
+  },
+  {
+   "name": "twitter:card",
+   "content": "summary_large_image"
+  },
+  {
+   "name": "twitter:title",
+   "content": "Contact Whitefox Recruitment | Recruitment Agency Gold Coast"
+  },
+  {
+   "name": "twitter:description",
+   "content": "Contact Whitefox Recruitment, a Gold Coast recruitment agency connecting employers and job seekers across South East Queensland and Northern New South Wales."
+  },
+  {
+   "name": "twitter:image",
+   "content": "/assets/img/zGJ860c1shnPFP2VGYz50T5kw.png"
+  },
+  {
+   "name": "robots",
+   "content": "max-image-preview:large"
+  }
+ ],
+ "icons": [
+  {
+   "rel": "icon",
+   "href": "/assets/img/xBdl2Yu0ZZNQbnY9KJEZO8JAYjY.png",
+   "media": "(prefers-color-scheme: light)"
+  },
+  {
+   "rel": "icon",
+   "href": "/assets/img/owvDlUMNkPyKKXUiDeVNwi70.png",
+   "media": "(prefers-color-scheme: dark)"
+  },
+  {
+   "rel": "apple-touch-icon",
+   "href": "/assets/img/jAfSxai60KQxuXBaGcYdB3pHyE.png",
+   "media": null
+  }
+ ],
+ "canonical": "https://whitefoxrecruitment.com.au/contact",
+ "appear": {
+  "1tn4kzp": {
+   "default": {
+    "initial": {
+     "opacity": 0.001,
+     "rotate": 0,
+     "rotateX": 0,
+     "rotateY": 0,
+     "scale": 1,
+     "skewX": 0,
+     "skewY": 0,
+     "x": 0,
+     "y": 20
+    },
+    "animate": {
+     "opacity": 1,
+     "rotate": 0,
+     "rotateX": 0,
+     "rotateY": 0,
+     "scale": 1,
+     "skewX": 0,
+     "skewY": 0,
+     "transition": {
+      "bounce": 0.2,
+      "delay": 0.2,
+      "duration": 0.8,
+      "type": "spring"
+     },
+     "x": 0,
+     "y": 0
+    }
+   }
+  }
+ },
+ "breakpoints": [
+  {
+   "hash": "splewh",
+   "mediaQuery": "(min-width: 1200px)"
+  },
+  {
+   "hash": "1mfsavh",
+   "mediaQuery": "(min-width: 810px) and (max-width: 1199.98px)"
+  },
+  {
+   "hash": "1ik8u5n",
+   "mediaQuery": "(max-width: 809.98px)"
+  }
+ ]
+}

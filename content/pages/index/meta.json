@@ -1,0 +1,150 @@
+{
+ "route": "/",
+ "title": "Recruitment Agency Gold Coast | Whitefox Recruitment",
+ "tags": [
+  {
+   "property": "og:url",
+   "content": "https://whitefoxrecruitment.com.au/"
+  },
+  {
+   "name": "description",
+   "content": "Whitefox Recruitment is a Gold Coast recruitment agency connecting exceptional talent with businesses across South East Queensland and Northern New South Wales."
+  },
+  {
+   "property": "og:type",
+   "content": "website"
+  },
+  {
+   "property": "og:title",
+   "content": "Recruitment Agency Gold Coast | Whitefox Recruitment"
+  },
+  {
+   "property": "og:description",
+   "content": "Whitefox Recruitment is a Gold Coast recruitment agency connecting exceptional talent with businesses across South East Queensland and Northern New South Wales."
+  },
+  {
+   "property": "og:image",
+   "content": "/assets/img/zGJ860c1shnPFP2VGYz50T5kw.png"
+  },
+  {
+   "name": "twitter:card",
+   "content": "summary_large_image"
+  },
+  {
+   "name": "twitter:title",
+   "content": "Recruitment Agency Gold Coast | Whitefox Recruitment"
+  },
+  {
+   "name": "twitter:description",
+   "content": "Whitefox Recruitment is a Gold Coast recruitment agency connecting exceptional talent with businesses across South East Queensland and Northern New South Wales."
+  },
+  {
+   "name": "twitter:image",
+   "content": "/assets/img/zGJ860c1shnPFP2VGYz50T5kw.png"
+  },
+  {
+   "name": "robots",
+   "content": "max-image-preview:large"
+  }
+ ],
+ "icons": [
+  {
+   "rel": "icon",
+   "href": "/assets/img/xBdl2Yu0ZZNQbnY9KJEZO8JAYjY.png",
+   "media": "(prefers-color-scheme: light)"
+  },
+  {
+   "rel": "icon",
+   "href": "/assets/img/owvDlUMNkPyKKXUiDeVNwi70.png",
+   "media": "(prefers-color-scheme: dark)"
+  },
+  {
+   "rel": "apple-touch-icon",
+   "href": "/assets/img/jAfSxai60KQxuXBaGcYdB3pHyE.png",
+   "media": null
+  }
+ ],
+ "canonical": "https://whitefoxrecruitment.com.au/",
+ "appear": {
+  "1lkt1c6": {
+   "default": {
+    "initial": {
+     "opacity": 0.001,
+     "rotate": 0,
+     "rotateX": 0,
+     "rotateY": 0,
+     "scale": 1,
+     "skewX": 0,
+     "skewY": 0,
+     "x": 0,
+     "y": 40
+    },
+    "animate": {
+     "opacity": 1,
+     "rotate": 0,
+     "rotateX": 0,
+     "rotateY": 0,
+     "scale": 1,
+     "skewX": 0,
+     "skewY": 0,
+     "transition": {
+      "damping": 35,
+      "delay": 0.4,
+      "mass": 2,
+      "stiffness": 125,
+      "type": "spring"
+     },
+     "x": 0,
+     "y": 0
+    }
+   }
+  },
+  "efljn6": {
+   "default": {
+    "initial": {
+     "opacity": 0.001,
+     "rotate": 0,
+     "rotateX": 0,
+     "rotateY": 0,
+     "scale": 1,
+     "skewX": 0,
+     "skewY": 0,
+     "x": 0,
+     "y": 180
+    },
+    "animate": {
+     "opacity": 1,
+     "rotate": 0,
+     "rotateX": 0,
+     "rotateY": 0,
+     "scale": 1,
+     "skewX": 0,
+     "skewY": 0,
+     "transition": {
+      "damping": 35,
+      "delay": 0.5,
+      "mass": 2,
+      "stiffness": 125,
+      "type": "spring"
+     },
+     "x": 0,
+     "y": 0
+    }
+   }
+  }
+ },
+ "breakpoints": [
+  {
+   "hash": "72rtr7",
+   "mediaQuery": "(min-width: 1200px)"
+  },
+  {
+   "hash": "1y52yj",
+   "mediaQuery": "(min-width: 810px) and (max-width: 1199.98px)"
+  },
+  {
+   "hash": "z6xis6",
+   "mediaQuery": "(max-width: 809.98px)"
+  }
+ ]
+}

@@ -1,0 +1,70 @@
+{
+ "route": "/job-board",
+ "title": "Jobs Gold Coast & SEQ | Whitefox Recruitment",
+ "tags": [
+  {
+   "property": "og:url",
+   "content": "https://whitefoxrecruitment.com.au/job-board"
+  },
+  {
+   "name": "description",
+   "content": "Search current jobs with Whitefox Recruitment, a Gold Coast recruitment agency connecting candidates with opportunities across South East Queensland and Northern New South Wales."
+  },
+  {
+   "property": "og:type",
+   "content": "website"
+  },
+  {
+   "property": "og:title",
+   "content": "Jobs Gold Coast & SEQ | Whitefox Recruitment"
+  },
+  {
+   "property": "og:description",
+   "content": "Search current jobs with Whitefox Recruitment, a Gold Coast recruitment agency connecting candidates with opportunities across South East Queensland and Northern New South Wales."
+  },
+  {
+   "property": "og:image",
+   "content": "/assets/img/zGJ860c1shnPFP2VGYz50T5kw.png"
+  },
+  {
+   "name": "twitter:card",
+   "content": "summary_large_image"
+  },
+  {
+   "name": "twitter:title",
+   "content": "Jobs Gold Coast & SEQ | Whitefox Recruitment"
+  },
+  {
+   "name": "twitter:description",
+   "content": "Search current jobs with Whitefox Recruitment, a Gold Coast recruitment agency connecting candidates with opportunities across South East Queensland and Northern New South Wales."
+  },
+  {
+   "name": "twitter:image",
+   "content": "/assets/img/zGJ860c1shnPFP2VGYz50T5kw.png"
+  },
+  {
+   "name": "robots",
+   "content": "max-image-preview:large"
+  }
+ ],
+ "icons": [
+  {
+   "rel": "icon",
+   "href": "/assets/img/xBdl2Yu0ZZNQbnY9KJEZO8JAYjY.png",
+   "media": "(prefers-color-scheme: light)"
+  },
+  {
+   "rel": "icon",
+   "href": "/assets/img/owvDlUMNkPyKKXUiDeVNwi70.png",
+   "media": "(prefers-color-scheme: dark)"
+  },
+  {
+   "rel": "apple-touch-icon",
+   "href": "/assets/img/jAfSxai60KQxuXBaGcYdB3pHyE.png",
+   "media": null
+  }
+ ],
+ "canonical": "https://whitefoxrecruitment.com.au/job-board",
+ "appear": {},
+ "breakpoints": []
+}

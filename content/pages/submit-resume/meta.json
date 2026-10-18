@@ -1,0 +1,70 @@
+{
+ "route": "/submit-resume",
+ "title": "Submit Your Resume | Whitefox Recruitment Gold Coast",
+ "tags": [
+  {
+   "property": "og:url",
+   "content": "https://whitefoxrecruitment.com.au/submit-resume"
+  },
+  {
+   "name": "description",
+   "content": "Submit your resume to Whitefox Recruitment, a Gold Coast recruitment agency connecting candidates with permanent and off-market opportunities across South East Queensland and Northern New South Wales."
+  },
+  {
+   "property": "og:type",
+   "content": "website"
+  },
+  {
+   "property": "og:title",
+   "content": "Submit Your Resume | Whitefox Recruitment Gold Coast"
+  },
+  {
+   "property": "og:description",
+   "content": "Submit your resume to Whitefox Recruitment, a Gold Coast recruitment agency connecting candidates with permanent and off-market opportunities across South East Queensland and Northern New South Wales."
+  },
+  {
+   "property": "og:image",
+   "content": "/assets/img/zGJ860c1shnPFP2VGYz50T5kw.png"
+  },
+  {
+   "name": "twitter:card",
+   "content": "summary_large_image"
+  },
+  {
+   "name": "twitter:title",
+   "content": "Submit Your Resume | Whitefox Recruitment Gold Coast"
+  },
+  {
+   "name": "twitter:description",
+   "content": "Submit your resume to Whitefox Recruitment, a Gold Coast recruitment agency connecting candidates with permanent and off-market opportunities across South East Queensland and Northern New South Wales."
+  },
+  {
+   "name": "twitter:image",
+   "content": "/assets/img/zGJ860c1shnPFP2VGYz50T5kw.png"
+  },
+  {
+   "name": "robots",
+   "content": "max-image-preview:large"
+  }
+ ],
+ "icons": [
+  {
+   "rel": "icon",
+   "href": "/assets/img/xBdl2Yu0ZZNQbnY9KJEZO8JAYjY.png",
+   "media": "(prefers-color-scheme: light)"
+  },
+  {
+   "rel": "icon",
+   "href": "/assets/img/owvDlUMNkPyKKXUiDeVNwi70.png",
+   "media": "(prefers-color-scheme: dark)"
+  },
+  {
+   "rel": "apple-touch-icon",
+   "href": "/assets/img/jAfSxai60KQxuXBaGcYdB3pHyE.png",
+   "media": null
+  }
+ ],
+ "canonical": "https://whitefoxrecruitment.com.au/submit-resume",
+ "appear": {},
+ "breakpoints": []
+}

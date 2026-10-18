@@ -1,0 +1,176 @@
+{
+ "route": "/insight/whitefox-recruitment-enters-third-year-of-exclusive-partnership-with-jewel-gold-coast",
+ "title": "Whitefox Recruitment Enters Third Year of Exclusive Partnership with Jewel Gold Coast - Whitefox",
+ "tags": [
+  {
+   "property": "og:url",
+   "content": "https://whitefoxrecruitment.com.au/insight/whitefox-recruitment-enters-third-year-of-exclusive-partnership-with-jewel-gold-coast"
+  },
+  {
+   "name": "description",
+   "content": "Recognised as the Gold Coast’s #1 recruitment agency for 2026, Whitefox Recruitment specialises in permanent recruitment, executive search and talent acquisition for leading Gold Coast businesses."
+  },
+  {
+   "property": "og:type",
+   "content": "website"
+  },
+  {
+   "property": "og:title",
+   "content": "Whitefox Recruitment Enters Third Year of Exclusive Partnership with Jewel Gold Coast - Whitefox"
+  },
+  {
+   "property": "og:description",
+   "content": "Recognised as the Gold Coast’s #1 recruitment agency for 2026, Whitefox Recruitment specialises in permanent recruitment, executive search and talent acquisition for leading Gold Coast businesses."
+  },
+  {
+   "property": "og:image",
+   "content": "/assets/img/N7iFrw7wh6u4TtPZx9ri65LJDc-7ec52a76.png"
+  },
+  {
+   "name": "twitter:card",
+   "content": "summary_large_image"
+  },
+  {
+   "name": "twitter:title",
+   "content": "Whitefox Recruitment Enters Third Year of Exclusive Partnership with Jewel Gold Coast - Whitefox"
+  },
+  {
+   "name": "twitter:description",
+   "content": "Recognised as the Gold Coast’s #1 recruitment agency for 2026, Whitefox Recruitment specialises in permanent recruitment, executive search and talent acquisition for leading Gold Coast businesses."
+  },
+  {
+   "name": "twitter:image",
+   "content": "/assets/img/N7iFrw7wh6u4TtPZx9ri65LJDc-7ec52a76.png"
+  },
+  {
+   "name": "robots",
+   "content": "max-image-preview:large"
+  }
+ ],
+ "icons": [
+  {
+   "rel": "icon",
+   "href": "/assets/img/xBdl2Yu0ZZNQbnY9KJEZO8JAYjY.png",
+   "media": "(prefers-color-scheme: light)"
+  },
+  {
+   "rel": "icon",
+   "href": "/assets/img/owvDlUMNkPyKKXUiDeVNwi70.png",
+   "media": "(prefers-color-scheme: dark)"
+  },
+  {
+   "rel": "apple-touch-icon",
+   "href": "/assets/img/jAfSxai60KQxuXBaGcYdB3pHyE.png",
+   "media": null
+  }
+ ],
+ "canonical": "https://whitefoxrecruitment.com.au/insight/whitefox-recruitment-enters-third-year-of-exclusive-partnership-with-jewel-gold-coast",
+ "appear": {
+  "1hx569b": {
+   "default": {
+    "initial": {
+     "opacity": 0.001,
+     "rotate": 0,
+     "rotateX": 0,
+     "rotateY": 0,
+     "scale": 1,
+     "skewX": 0,
+     "skewY": 0,
+     "x": 0,
+     "y": 20
+    },
+    "animate": {
+     "opacity": 1,
+     "rotate": 0,
+     "rotateX": 0,
+     "rotateY": 0,
+     "scale": 1,
+     "skewX": 0,
+     "skewY": 0,
+     "transition": {
+      "bounce": 0.2,
+      "delay": 0.2,
+      "duration": 0.8,
+      "type": "spring"
+     },
+     "x": 0,
+     "y": 0
+    }
+   },
+   "1e6jlu2": {
+    "initial": {
+     "opacity": 0.001,
+     "rotate": 0,
+     "rotateX": 0,
+     "rotateY": 0,
+     "scale": 1,
+     "skewX": 0,
+     "skewY": 0,
+     "x": 0,
+     "y": 20
+    },
+    "animate": {
+     "opacity": 1,
+     "rotate": 0,
+     "rotateX": 0,
+     "rotateY": 0,
+     "scale": 1,
+     "skewX": 0,
+     "skewY": 0,
+     "transition": {
+      "bounce": 0.2,
+      "delay": 0.2,
+      "duration": 0.8,
+      "type": "spring"
+     },
+     "x": 0,
+     "y": 0
+    }
+   },
+   "1pft2og": {
+    "initial": {
+     "opacity": 0.001,
+     "rotate": 0,
+     "rotateX": 0,
+     "rotateY": 0,
+     "scale": 1,
+     "skewX": 0,
+     "skewY": 0,
+     "x": 0,
+     "y": 20
+    },
+    "animate": {
+     "opacity": 1,
+     "rotate": 0,
+     "rotateX": 0,
+     "rotateY": 0,
+     "scale": 1,
+     "skewX": 0,
+     "skewY": 0,
+     "transition": {
+      "bounce": 0.2,
+      "delay": 0.2,
+      "duration": 0.8,
+      "type": "spring"
+     },
+     "x": 0,
+     "y": 0
+    }
+   }
+  }
+ },
+ "breakpoints": [
+  {
+   "hash": "l3r8lm",
+   "mediaQuery": "(min-width: 1200px)"
+  },
+  {
+   "hash": "1e6jlu2",
+   "mediaQuery": "(min-width: 810px) and (max-width: 1199.98px)"
+  },
+  {
+   "hash": "1pft2og",
+   "mediaQuery": "(max-width: 809.98px)"
+  }
+ ]
+}
