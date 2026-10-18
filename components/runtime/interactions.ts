@@ -15,26 +15,6 @@ const COUNTERS: Record<string, number[]> = {
 
 const visible = (el: Element) => (el as HTMLElement).offsetParent !== null || getComputedStyle(el).position === "fixed";
 
-/** Header: slides up (78px) and fades out while scrolling down, comes back on any scroll up (measured).
- *  The 20px "always shown near the top" threshold is an estimate: the live header was already hidden at y=60. */
-function header(main: HTMLElement) {
-  const bars = [...main.querySelectorAll<HTMLElement>("*")].filter((e) => getComputedStyle(e).position === "fixed" && e.querySelector("nav"));
-  if (!bars.length) return () => {};
-  let last = window.scrollY, shown = true;
-  const base = bars.map((b) => b.style.transform || "translateX(-50%)");
-  const set = (show: boolean) => {
-    if (show === shown) return; shown = show;
-    const s = springEasing(400, 40, 1);
-    bars.forEach((b, i) => b.animate(
-      [{ transform: getComputedStyle(b).transform, opacity: getComputedStyle(b).opacity },
-       { transform: `${base[i]} translateY(${show ? 0 : -78}px)`, opacity: show ? 1 : 0 }],
-      { duration: s.duration, easing: s.easing, fill: "forwards" }));
-  };
-  const on = () => { const y = window.scrollY; if (y > last + 2 && y > 20) set(false); else if (y < last - 2 || y <= 20) set(true); last = y; };
-  window.addEventListener("scroll", on, { passive: true });
-  return () => window.removeEventListener("scroll", on);
-}
-
 /** Header menu. Framer renders the open menu only on click, so its markup was captured from the live site
  *  (scripts/migrate/capture-menu.mjs → content/menu.json, one per closed nav variant). As on the live site:
  *  - a tap on the menu icon swaps the nav to its "… Open" variant; the panel grows in with the nav's
@@ -126,7 +106,7 @@ function counters(main: HTMLElement) {
 
 /** Blocks Framer renders with will-change + opacity:0 (a scroll-in effect) play in as they enter the viewport. */
 function blocks(main: HTMLElement) {
-  const els = [...main.querySelectorAll<HTMLElement>("[style*='will-change']")].filter((e) => /opacity:\s*0(;|$)/.test(e.getAttribute("style") || ""));
+  const els = [...main.querySelectorAll<HTMLElement>("[style*='will-change']")].filter((e) => !e.hasAttribute("data-fx") && /opacity:\s*0(;|$)/.test(e.getAttribute("style") || ""));
   if (reduced()) { els.forEach((e) => { e.style.opacity = "1"; e.style.transform = "none"; }); return () => {}; }
   const io = new IntersectionObserver((es) => es.forEach((e) => {
     if (!e.isIntersecting) return; io.unobserve(e.target);
@@ -261,6 +241,6 @@ function testimonials(main: HTMLElement) {
 }
 
 export function initInteractions(main: HTMLElement) {
-  const off = [header(main), menu(main), tickers(main), counters(main), blocks(main), shutter(main), sectors(main), testimonials(main)];
+  const off = [menu(main), tickers(main), counters(main), blocks(main), shutter(main), sectors(main), testimonials(main)];
   return () => off.forEach((f) => f());
 }

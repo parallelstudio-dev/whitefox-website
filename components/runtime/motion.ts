@@ -36,14 +36,39 @@ const bezier = (e: number[] | string | undefined) =>
 /** Framer's default transition when an effect doesn't set one. */
 export const DEFAULT: Transition = { type: "spring", stiffness: 400, damping: 30, mass: 1 };
 
+/**
+ * Framer's duration-based spring ({ duration, bounce }): the stiffness and damping that settle in `duration`,
+ * found the way Framer Motion's findSpring does (Newton's method on the spring envelope, 0.001 tolerance).
+ */
+export function findSpring(duration: number, bounce = 0.25, mass = 1) {
+  const safeMin = 0.001;
+  const ratio = Math.min(1, Math.max(0.05, 1 - bounce));
+  const d = Math.min(10, Math.max(0.01, duration));
+  let envelope: (w: number) => number, derivative: (w: number) => number;
+  if (ratio < 1) {
+    const angular = (w: number) => w * Math.sqrt(1 - ratio * ratio);
+    envelope = (w) => safeMin - ((w * ratio) / angular(w)) * Math.exp(-w * ratio * d);
+    derivative = (w) => {
+      const delta = w * ratio * d, e = ratio * ratio * w * w * d, f = Math.exp(-delta), g = angular(w * w);
+      const factor = -envelope(w) + safeMin > 0 ? -1 : 1;
+      return (factor * (-e * f)) / g;
+    };
+  } else {
+    envelope = (w) => -safeMin + Math.exp(-w * d) * (w * d + 1);
+    derivative = (w) => Math.exp(-w * d) * (-w * d * d);
+  }
+  let w = 5 / d;
+  for (let i = 0; i < 12; i++) w = w - envelope(w) / derivative(w);
+  if (!Number.isFinite(w)) return { stiffness: 100, damping: 10 };
+  const stiffness = w * w * mass;
+  return { stiffness, damping: ratio * 2 * Math.sqrt(mass * stiffness) };
+}
+
 export function timing(tr: Transition | undefined) {
   const t = tr ?? DEFAULT;
   if (t.type === "spring") {
-    if (t.stiffness === undefined && t.duration !== undefined) {
-      // Framer's duration-based spring ("bounce"): approximate with a critically damped curve of that length.
-      return { duration: t.duration * 1000, easing: "cubic-bezier(.17,.67,.3,1)", delay: (t.delay ?? 0) * 1000 };
-    }
-    const s = springEasing(t.stiffness ?? 400, t.damping ?? 30, t.mass ?? 1);
+    const k = t.stiffness === undefined && t.duration !== undefined ? findSpring(t.duration, t.bounce ?? 0.25, t.mass ?? 1) : { stiffness: t.stiffness ?? 400, damping: t.damping ?? 30 };
+    const s = springEasing(k.stiffness, k.damping, t.mass ?? 1);
     return { duration: s.duration, easing: s.easing, delay: (t.delay ?? 0) * 1000 };
   }
   return { duration: (t.duration ?? 0.3) * 1000, easing: bezier(t.ease), delay: (t.delay ?? 0) * 1000 };

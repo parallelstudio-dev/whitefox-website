@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { play, reduced, type Pose, type Transition } from "./runtime/motion";
 import { initInteractions } from "./runtime/interactions";
+import { HANDLED, initEffects } from "./runtime/effects";
 
 type Appear = Record<string, Record<string, { initial: Pose; animate: Pose }>>;
 type Breakpoint = { hash: string; mediaQuery: string };
@@ -11,15 +12,15 @@ const HIDDEN = /opacity:\s*0\.001/;
 /**
  * Brings the migrated Framer markup to life, without Framer's runtime:
  *  1. appear effects (data-framer-appear-id) play on load with the exact keyframes and springs Framer exported;
- *  2. scroll-in effects (elements rendered with Framer's hidden initial state) play once as they enter the viewport,
- *     words of animated headings one after another;
+ *  2. scroll effects with Framer's own settings (effects.ts); any other element rendered in Framer's hidden initial
+ *     state plays once as it enters the viewport, words of animated headings one after another;
  *  3. interactive components (menu, ticker, counters, sliders, video, accordions, forms) are wired in interactions.ts.
  */
 export default function Runtime({ appear, breakpoints }: { appear: Record<string, unknown>; breakpoints: Breakpoint[] }) {
   useEffect(() => {
     const main = document.getElementById("main");
     if (!main) return;
-    const cleanups: (() => void)[] = [];
+    const cleanups: (() => void)[] = [initEffects(main)];
 
     if (reduced()) {
       main.querySelectorAll<HTMLElement>("[style]").forEach((el) => {
@@ -40,7 +41,7 @@ export default function Runtime({ appear, breakpoints }: { appear: Record<string
       });
 
       // 2. Scroll-in effects.
-      const pending = [...main.querySelectorAll<HTMLElement>("[style]")].filter((el) => !appearing.has(el) && HIDDEN.test(el.getAttribute("style") || ""));
+      const pending = [...main.querySelectorAll<HTMLElement>("[style]")].filter((el) => !appearing.has(el) && !el.hasAttribute(HANDLED) && HIDDEN.test(el.getAttribute("style") || ""));
       const io = new IntersectionObserver((entries) => {
         const now = entries.filter((e) => e.isIntersecting).map((e) => e.target as HTMLElement);
         // Words of one heading animate in sequence; blocks animate together.
